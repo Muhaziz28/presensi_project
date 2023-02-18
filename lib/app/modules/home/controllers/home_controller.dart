@@ -1,23 +1,43 @@
+import 'package:absensi_project_app/app/routes/app_pages.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  RxBool isLoading = false.obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> stremUser() async* {
+    String getUid = auth.currentUser!.uid;
+
+    yield* firestore.collection('personil').doc(getUid).snapshots();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Stream<QuerySnapshot<Map<String, dynamic>>> stremPresence() async* {
+    String getUid = auth.currentUser!.uid;
+
+    yield* firestore
+        .collection('personil')
+        .doc(getUid)
+        .collection("presence")
+        .orderBy('date', descending: true)
+        .limitToLast(5)
+        .snapshots();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
+  Stream<DocumentSnapshot<Map<String, dynamic>>> stremPresenceToday() async* {
+    String getUid = auth.currentUser!.uid;
 
-  void increment() => count.value++;
+    String todayPresence =
+        DateFormat.yMd().format(DateTime.now()).replaceAll('/', '-');
+    yield* firestore
+        .collection('personil')
+        .doc(getUid)
+        .collection("presence")
+        .doc(todayPresence)
+        .snapshots();
+  }
 }
