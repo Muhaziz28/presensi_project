@@ -42,7 +42,7 @@ class PageIndexController extends GetxController {
 
           // check distance
           double distance = Geolocator.distanceBetween(
-              -0.891397, 100.353879, position.latitude, position.longitude);
+              -0.897697, 100.374608, position.latitude, position.longitude);
 
           await updatePosition(position);
           Get.back();
@@ -76,7 +76,7 @@ class PageIndexController extends GetxController {
 
     // show progress dialog
 
-    if (distance <= 1000) {
+    if (distance <= 100) {
       String status = 'Di dalam area';
 
       if (snapPresence.docs.length == 0) {

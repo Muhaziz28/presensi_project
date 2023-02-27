@@ -94,6 +94,54 @@ class HomeView extends GetView<HomeController> {
                   const SizedBox(
                     height: 20,
                   ),
+                  Text(
+                    "Menu",
+                    style: blackTextStyle.copyWith(
+                      fontSize: 18,
+                      fontWeight: semiBold,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            InkWell(
+                              borderRadius: BorderRadius.circular(10),
+                              onTap: () => Get.toNamed(Routes.UPDATE_ISTRI,
+                                  arguments: data),
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: primaryColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.storage,
+                                      color: whiteColor,
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      'Data Istri',
+                                      style: whiteTextStyle.copyWith(
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
@@ -249,7 +297,7 @@ class HomeView extends GetView<HomeController> {
         style: TabStyle.fixedCircle,
         items: [
           TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.fingerprint, title: 'Absen'),
+          TabItem(icon: Icons.fingerprint, title: 'Absen', isIconBlend: true),
           TabItem(icon: Icons.people, title: 'Profile'),
         ],
         initialActiveIndex: pageController.currentIndex.value,
