@@ -64,9 +64,14 @@ class PresensiDetailView extends GetView<PresensiDetailController> {
                         ? '-'
                         : '${DateFormat.jms().format(DateTime.parse(data['check_out']?['date']))}'),
                     Text(
-                        'Latitude : ${data['check_out']?['latitude']} , Longitude : ${data['check_out']?['longitude']}',
+                        data['check_out'] == null
+                            ? 'Latitude : - , Longitude : -'
+                            : 'Latitude : ${data['check_out']?['latitude']} , Longitude : ${data['check_out']?['longitude']}',
                         style: blackTextStyle.copyWith(fontWeight: medium)),
-                    Text('Status  : ${data['check_out']?['status']}',
+                    Text(
+                        data['check_out'] == null
+                            ? 'Status : -'
+                            : 'Status : ${data['check_out']?['status']}',
                         style: blackTextStyle.copyWith(fontWeight: medium)),
                   ],
                 ),
