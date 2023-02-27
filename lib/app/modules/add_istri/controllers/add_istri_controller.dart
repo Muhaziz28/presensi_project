@@ -13,7 +13,7 @@ class AddIstriController extends GetxController {
   List<String> pekerjaan = [
     'Pilih Pekerjaan Istri',
     'Ibu Rumah Tangga',
-    'Pegawai Negeri',
+    'Pegawai Negeri Sipil',
     'Pegawai Swasta',
     'Wiraswasta',
     'Lainnya',
